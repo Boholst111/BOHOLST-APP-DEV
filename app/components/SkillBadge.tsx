@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { animationVariants } from '@/lib/animations';
 
 interface SkillBadgeProps {
   skill: string;

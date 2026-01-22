@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { animationVariants } from '@/lib/animations';
 import { ReactNode } from 'react';
 
 interface SectionHeadingProps {

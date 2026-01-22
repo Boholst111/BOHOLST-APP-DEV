@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { animationVariants, floatingElementVariants } from '@/lib/animations';
 import { ArrowDown } from 'lucide-react';
 import { personalInfo } from '@/lib/data';
 

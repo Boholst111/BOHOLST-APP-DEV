@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import ProjectCard from '@/components/ProjectCard';
 import SectionHeading from '@/components/SectionHeading';
 import { projectsData } from '@/lib/data';
-import { animationVariants } from '@/lib/animations';
 
 export const ProjectsSection: React.FC = () => {
   return (

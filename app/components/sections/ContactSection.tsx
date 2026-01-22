@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import SectionHeading from '@/components/SectionHeading';
 import ContactForm from '@/components/ContactForm';
-import { animationVariants } from '@/lib/animations';
 import { personalInfo } from '@/lib/data';
 
 export const ContactSection: React.FC = () => {
