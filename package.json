@@ -4,7 +4,7 @@
   "description": "Modern, high-performance personal portfolio website built with Next.js 14+, TypeScript, Tailwind CSS, and Framer Motion",
   "private": true,
   "engines": {
-    "node": "18.x"
+    "node": "24.x"
   },
   "scripts": {
     "dev": "next dev",
