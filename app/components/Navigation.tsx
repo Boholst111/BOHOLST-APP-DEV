@@ -34,7 +34,7 @@ export const Navigation: React.FC = () => {
           className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent"
           whileHover={{ scale: 1.05 }}
         >
-          <Link href="#home">Dev</Link>
+          <Link href="#home">Portfolio</Link>
         </motion.div>
 
         {/* Desktop Navigation */}
