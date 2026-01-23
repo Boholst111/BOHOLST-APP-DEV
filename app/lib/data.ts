@@ -5,10 +5,11 @@ export const personalInfo = {
   shortBio: 'Building high-performance web applications with clean, scalable code',
   longAbout:
     'I\'m a passionate Full-Stack Developer with a deep commitment to crafting beautiful, performant web applications that solve real-world problems. With expertise in modern technologies like React, Next.js, and Node.js, I blend technical excellence with user-centered design to create digital experiences that matter. I thrive on complex challenges and believe clean code is not just a practice—it\'s a craft.',
-  email: 'john@example.com',
+  email: 'john.boholst@urios.edu.ph',
   phone: '+1 (555) 123-4567',
-  location: 'San Francisco, CA',
+  location: 'Butuan City, Agusan Del Norte',
   availability: 'Available for new opportunities',
+  profileImage: '/profile.png', // Professional profile image with rounded corners
 };
 
 // Projects Data
