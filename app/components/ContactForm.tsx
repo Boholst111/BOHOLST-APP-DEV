@@ -1,12 +1,17 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Mail, Check, AlertCircle } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+
+// 1. Removed: import { ContactForm } from '@/components/ContactForm'; 
+// (You cannot import a component into its own file)
 
 type FormStatus = 'idle' | 'loading' | 'success' | 'error';
 
 export const ContactForm: React.FC = () => {
+  const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -26,21 +31,29 @@ export const ContactForm: React.FC = () => {
     e.preventDefault();
     setStatus('loading');
 
-    // Simulate form submission
-    setTimeout(() => {
-      if (formData.name && formData.email && formData.message) {
+    if (formRef.current) {
+      emailjs.sendForm(
+        'service_1g9wzqm',   
+        'template_8j5sjsr',  
+        formRef.current, 
+        'dUHftJ3oOMqhwVhIW' // TODO: Replace with your actual Public Key from EmailJS
+      )
+      .then(() => {
         setStatus('success');
         setFormData({ name: '', email: '', message: '' });
         setTimeout(() => setStatus('idle'), 3000);
-      } else {
+      })
+      .catch((error) => {
+        console.error('EmailJS Error:', error);
         setStatus('error');
         setTimeout(() => setStatus('idle'), 3000);
-      }
-    }, 1500);
+      });
+    }
   };
 
   return (
     <motion.form
+      ref={formRef}
       onSubmit={handleSubmit}
       className="w-full max-w-2xl mx-auto space-y-6"
       initial={{ opacity: 0, y: 20 }}
@@ -48,20 +61,14 @@ export const ContactForm: React.FC = () => {
       transition={{ duration: 0.8, ease: 'easeOut' }}
       viewport={{ once: true, margin: '-100px' }}
     >
-      {/* Name Input */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-      >
+      <motion.div>
         <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
           Full Name
         </label>
         <input
           type="text"
           id="name"
-          name="name"
+          name="name" 
           value={formData.name}
           onChange={handleChange}
           className="input-field"
@@ -70,20 +77,14 @@ export const ContactForm: React.FC = () => {
         />
       </motion.div>
 
-      {/* Email Input */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
+      <motion.div>
         <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
           Email Address
         </label>
         <input
           type="email"
           id="email"
-          name="email"
+          name="email" 
           value={formData.email}
           onChange={handleChange}
           className="input-field"
@@ -92,19 +93,13 @@ export const ContactForm: React.FC = () => {
         />
       </motion.div>
 
-      {/* Message Textarea */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-      >
+      <motion.div>
         <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">
           Message
         </label>
         <textarea
           id="message"
-          name="message"
+          name="message" 
           value={formData.message}
           onChange={handleChange}
           className="input-field resize-none"
@@ -114,17 +109,12 @@ export const ContactForm: React.FC = () => {
         />
       </motion.div>
 
-      {/* Submit Button */}
       <motion.button
         type="submit"
         disabled={status === 'loading' || status === 'success'}
         className="w-full btn-primary flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.4 }}
       >
         {status === 'idle' && (
           <>
@@ -151,7 +141,7 @@ export const ContactForm: React.FC = () => {
         {status === 'error' && (
           <>
             <AlertCircle size={20} />
-            <span>Please fill all fields</span>
+            <span>Failed to send. Try again.</span>
           </>
         )}
       </motion.button>
@@ -159,4 +149,5 @@ export const ContactForm: React.FC = () => {
   );
 };
 
+// 2. Added: Default export to fix the build error in ContactSection.tsx
 export default ContactForm;
